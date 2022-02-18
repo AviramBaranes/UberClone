@@ -1,14 +1,14 @@
 import { View, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import React from 'react';
 
-import { items } from '../../utils/itemsCategory';
+import { items } from '../../../utils/itemsCategory';
 
 export default function Categories() {
   return (
     <View style={styles.container}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {items.map((item) => (
-          <View style={styles.imageContainer}>
+          <View key={item.text} style={styles.imageContainer}>
             <Image source={item.image} style={styles.image} />
             <Text style={styles.text}>{item.text}</Text>
           </View>

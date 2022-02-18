@@ -1,9 +1,13 @@
 import { View } from 'react-native';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { LeftButton, RightButton } from './SearchButtons';
 
-export default function SearchBar() {
+export default function SearchBar({
+  setCity,
+}: {
+  setCity: Dispatch<SetStateAction<string>>;
+}) {
   return (
     <View
       style={{
@@ -12,6 +16,9 @@ export default function SearchBar() {
       }}
     >
       <GooglePlacesAutocomplete
+        onPress={(data, detail = null) => {
+          setCity(data.description.split(',')[0]);
+        }}
         styles={{
           textInput: {
             backgroundColor: '#eee',
@@ -29,7 +36,7 @@ export default function SearchBar() {
         }}
         renderRightButton={() => <RightButton />}
         renderLeftButton={() => <LeftButton />}
-        query={{}}
+        query={{ key: 'AIzaSyBH2Eq5Biok7U9fQEnM2JVa6iNf5QNd_to' }}
         placeholder='Search'
       />
     </View>
