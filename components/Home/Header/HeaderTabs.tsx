@@ -1,10 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import HeaderButton from './HeaderButton';
 
-export default function HeaderTabs() {
-  const [active, setActive] = useState('Delivery');
-
+export default function HeaderTabs({
+  active,
+  setActive,
+}: {
+  active: string;
+  setActive: Dispatch<SetStateAction<string>>;
+}) {
   return (
     <View style={styles.header}>
       <HeaderButton text='Delivery' active={active} setActive={setActive} />
