@@ -1,14 +1,18 @@
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react';
-import { RestaurantItem } from '../../../types/ResterauntItem';
+import { RestaurantItem } from '../../../types/RestaurantItem';
 import RestaurantImage from './RestaurantImage';
 import RestaurantInfo from './RestaurantInfo';
+import { RootStackParamList } from '../../../RootNavigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 interface RestaurantsItemsProps {
+  navigation: NativeStackScreenProps<RootStackParamList, 'Home'>['navigation'];
   restaurantData: RestaurantItem[];
 }
 
 export default function RestaurantsItems({
+  navigation,
   restaurantData,
 }: RestaurantsItemsProps) {
   const styles = StyleSheet.create({
@@ -29,6 +33,7 @@ export default function RestaurantsItems({
           style={styles.touchable}
           activeOpacity={1}
           key={restaurant.image_url}
+          onPress={() => navigation.navigate('RestaurantDetail', restaurant)}
         >
           <View style={styles.container}>
             <RestaurantImage imageUrl={restaurant.image_url} />

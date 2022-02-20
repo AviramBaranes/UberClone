@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import Home from './screens/Home';
+import RootNavigation from './RootNavigation';
 
 export default function App() {
-  return <Home />;
+  return <RootNavigation />;
 }

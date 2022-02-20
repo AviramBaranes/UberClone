@@ -1,6 +1,7 @@
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Divider } from 'react-native-elements/dist/divider/Divider';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import HeaderTabs from '../components/Home/Header/HeaderTabs';
 import SearchBar from '../components/Home/Header/SearchBar';
@@ -8,8 +9,11 @@ import Categories from '../components/Home/Categories/Categories';
 import { getRestaurantsData } from '../utils/getRestaurantsData';
 import RestaurantsItems from '../components/Home/RestaurantsItems/RestaurantsItems';
 import BottomTabs from '../components/Home/BottomTabs/BottomTabs';
+import { RootStackParamList } from '../RootNavigation';
 
-export default function Home() {
+type HomeProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+export default function Home({ navigation }: HomeProps) {
   const [activeTab, setActiveTab] = useState('Delivery');
   const [restaurantData, setRestaurantData] = useState([]);
   const [city, setCity] = useState('New York');
@@ -34,7 +38,10 @@ export default function Home() {
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
-        <RestaurantsItems restaurantData={restaurantData} />
+        <RestaurantsItems
+          navigation={navigation}
+          restaurantData={restaurantData}
+        />
       </ScrollView>
       <Divider width={1} />
       <BottomTabs />
