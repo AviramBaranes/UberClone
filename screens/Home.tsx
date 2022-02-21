@@ -6,7 +6,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import HeaderTabs from '../components/Home/Header/HeaderTabs';
 import SearchBar from '../components/Home/Header/SearchBar';
 import Categories from '../components/Home/Categories/Categories';
-import { getRestaurantsData } from '../utils/getRestaurantsData';
+import { getRestaurantsData } from '../utils/getData';
 import RestaurantsItems from '../components/Home/RestaurantsItems/RestaurantsItems';
 import BottomTabs from '../components/Home/BottomTabs/BottomTabs';
 import { RootStackParamList } from '../RootNavigation';
