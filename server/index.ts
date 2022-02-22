@@ -15,8 +15,9 @@ http
     console.log(url);
 
     if (method === 'POST' && path === '/add-order') {
-      const writeStream = fs.createWriteStream(filesPath);
+      const writeStream = fs.createWriteStream(filesPath, { flags: 'a' });
       req.pipe(writeStream);
+      writeStream.write('\n');
       req.on('end', () => {
         res.writeHead(200, { 'content-type': 'text/html' });
         res.end('Your order has been saved');

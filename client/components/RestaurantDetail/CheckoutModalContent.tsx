@@ -9,6 +9,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { MenuItem } from '../../types/MenuItem';
 import OrderItem from './OrderItem';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { CLEAR_CART } from '../../redux/actions';
 
 export default function CheckoutModalContent({
   restaurantName,
@@ -21,6 +23,8 @@ export default function CheckoutModalContent({
   total: string;
   setModalVisibility: Dispatch<SetStateAction<boolean>>;
 }) {
+  const dispatch = useDispatch();
+
   async function checkOutHandler() {
     await axios.post('http://192.168.1.182:8081/add-order', {
       items,
@@ -28,6 +32,7 @@ export default function CheckoutModalContent({
       date: Date.now(),
     });
     setModalVisibility(false);
+    dispatch({ type: CLEAR_CART });
   }
 
   return (

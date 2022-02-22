@@ -18,8 +18,9 @@ http_1.default
     }
     console.log(url);
     if (method === 'POST' && path === '/add-order') {
-        var writeStream = fs_1.default.createWriteStream(filesPath);
+        var writeStream = fs_1.default.createWriteStream(filesPath, { flags: 'a' });
         req.pipe(writeStream);
+        writeStream.write('\n');
         req.on('end', function () {
             res.writeHead(200, { 'content-type': 'text/html' });
             res.end('Your order has been saved');

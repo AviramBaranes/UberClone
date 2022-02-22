@@ -1,5 +1,5 @@
 import { MenuItem } from '../../types/MenuItem';
-import { ADD_ITEM, REMOVE_ITEM } from '../actions';
+import { ADD_ITEM, CLEAR_CART, REMOVE_ITEM } from '../actions';
 
 type Action = {
   type: string;
@@ -37,6 +37,14 @@ const cartReducer = (state = initialState, action: Action) => {
       );
       newState.totalPrice -= +menuItem.price.replace('$', '');
       return newState;
+    }
+
+    case CLEAR_CART: {
+      return {
+        items: [],
+        restaurantName: '',
+        totalPrice: 0,
+      };
     }
 
     default:

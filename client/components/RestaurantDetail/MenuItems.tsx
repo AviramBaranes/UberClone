@@ -5,8 +5,9 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import { getMenuItems } from '../../utils/getData';
 import { Divider } from 'react-native-elements';
 import { MenuItem } from '../../types/MenuItem';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ADD_ITEM, REMOVE_ITEM } from '../../redux/actions';
+import { RootState } from '../../redux/reducers';
 
 export default function MenuItems({
   restaurantName,
@@ -14,6 +15,12 @@ export default function MenuItems({
   restaurantName: string;
 }) {
   const dispatch = useDispatch();
+
+  const { items } = useSelector((state: RootState) => state.cartReducer);
+
+  const isFoodInCart = (item: MenuItem) => {
+    return !!items.find((currItem) => currItem.title === item.title);
+  };
 
   const checkboxClickedHandler = (item: MenuItem, isChecked: boolean) => {
     if (isChecked) {
@@ -34,6 +41,7 @@ export default function MenuItems({
             iconStyle={{ borderColor: 'lightgray', borderRadius: 0 }}
             fillColor='green'
             onPress={(isChecked) => checkboxClickedHandler(item, isChecked)}
+            isChecked={isFoodInCart(item)}
           />
           <View style={styles.infoContainer}>
             <Text style={styles.title}>{item.title}</Text>
